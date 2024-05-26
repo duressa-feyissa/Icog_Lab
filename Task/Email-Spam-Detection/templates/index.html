@@ -1,95 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Email Spam Detection</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h1, h2 {
-            text-align: center;
-        }
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-        button {
-            padding: 10px 20px;
-            border: none;
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        #wordResult, #emailResult {
-            margin-top: 10px;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1,
+      h2 {
+        text-align: center;
+      }
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+      button {
+        padding: 10px 20px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      #wordResult,
+      #emailResult {
+        margin-top: 10px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>Email Spam Detection</h1>
+      <h1>Email Spam Detection</h1>
 
-        <h2>Predict Word Spam Probability:</h2>
-        <input type="text" id="wordInput" placeholder="Enter a word">
-        <button onclick="predictWord()">Predict</button>
-        <div id="wordResult"></div>
+      <h2>Predict Word Spam Probability:</h2>
+      <input type="text" id="wordInput" placeholder="Enter a word" />
+      <button onclick="predictWord()">Predict</button>
+      <div id="wordResult"></div>
 
-        <h2>Predict Email Spam:</h2>
-        <textarea id="emailInput" placeholder="Enter an email"></textarea>
-        <button onclick="predictEmail()">Predict</button>
-        <div id="emailResult"></div>
+      <h2>Predict Email Spam:</h2>
+      <textarea id="emailInput" placeholder="Enter an email"></textarea>
+      <button onclick="predictEmail()">Predict</button>
+      <div id="emailResult"></div>
     </div>
 
     <script>
-        function predictWord() {
-            var word = document.getElementById("wordInput").value;
-            fetch("/predict_word?word=" + word)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById("wordResult").innerText = "Probability that '" + data.word + "' is spam: " + data.probability.toFixed(4);
-                });
-        }
+      function predictWord() {
+        var word = document.getElementById("wordInput").value;
+        fetch("/predict_word?word=" + word)
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("wordResult").innerText =
+              "Probability that '" +
+              data.word +
+              "' is spam: " +
+              data.probability.toFixed(4);
+          });
+      }
 
-        function predictEmail() {
-            var email = document.getElementById("emailInput").value;
-            fetch("/predict_email", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: email
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("emailResult").innerText = "Predicted result for email: " + data.email + " is " + data.result;
-            });
-        }
+      function predictEmail() {
+        var email = document.getElementById("emailInput").value;
+        fetch("/predict_email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("emailResult").innerText =
+              "Predicted result for email: " + data.result;
+          });
+      }
     </script>
-</body>
+  </body>
 </html>
