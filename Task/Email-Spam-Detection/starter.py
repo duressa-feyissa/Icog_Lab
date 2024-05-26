@@ -73,7 +73,7 @@ def predict_word():
 def predict_email():
     sample_email = request.json.get('email')
     posterior = calculate_posterior(sample_email)
-    return jsonify({"email": sample_email, "result": posterior})
+    return jsonify({"Result": posterior})
 
 if __name__ == '__main__':
     app.run(debug=True)
