@@ -11,7 +11,7 @@ emails = pd.read_csv("emails.csv")
 
 def process_email(text):
     text = text.lower()
-    return list(text.split())
+    return list(set(text.split()))
 
 emails["words"] = emails["text"].apply(process_email)
 
@@ -73,7 +73,7 @@ def predict_word():
 def predict_email():
     sample_email = request.json.get('email')
     posterior = calculate_posterior(sample_email)
-    return jsonify({"Result": posterior})
+    return jsonify({"result": posterior})
 
 if __name__ == '__main__':
     app.run(debug=True)
