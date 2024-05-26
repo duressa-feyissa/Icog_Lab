@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -66,6 +66,10 @@ def predict_naive_bayes(email):
     else:
         return "normal"
 
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.route('/predict_email', methods=['POST'])
 def predict_email():
