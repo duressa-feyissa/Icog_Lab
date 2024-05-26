@@ -12,7 +12,6 @@ def process_email(text):
     text = text.lower()
     return list(set(text.split()))
 
-
 emails["words"] = emails["text"].apply(process_email)
 
 total_emails_count = len(emails)
@@ -40,16 +39,14 @@ for email in normal_emails["words"]:
         else:
             normal_words[word] = 1
 
-
 def calculate_posteriors(word):
-    likelihood_spam = (spam_words.get(word, 0) + 1) / (total_spam_words_count + vocab_size)
-    likelihood_normal = (normal_words.get(word, 0) + 1) / (total_normal_words_count + vocab_size)
+    likelihood_spam = (spam_words.get(word, 0) + 1) / (total_spam_words_count + vsize)
+    likelihood_normal = (normal_words.get(word, 0) + 1) / (total_normal_words_count + vsize)
     return likelihood_spam, likelihood_normal
-
 
 total_spam_words_count = sum(spam_words.values())
 total_normal_words_count = sum(normal_words.values())
-vocab_size = len(set(spam_words.keys()).union(set(normal_words.keys())))
+vsize = len(set(spam_words.keys()).union(set(normal_words.keys())))
 
 def predict_naive_bayes(email):
     email_words = process_email(email)
@@ -66,7 +63,6 @@ def predict_naive_bayes(email):
     else:
         return "normal"
 
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -77,7 +73,6 @@ def predict_email():
     email = data.get("email", "")
     result = predict_naive_bayes(email)
     return jsonify({"result": result})
-
 
 if __name__ == '__main__':
     app.run(debug=True)
