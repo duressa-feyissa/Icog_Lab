@@ -6,8 +6,8 @@ This Flask application provides a simple interface for predicting whether an ema
 Installation
 ------------
 
-1. Clone the repository:
-2. Navigate to the project directory:
+1. Clone the repository: https://github.com/duressa-feyissa/Icog_Lab.git
+2. Navigate to the project directory: Task/Email-Spam-Detection
 3. Install the required dependencies using pip: `pip install -r requirements.txt`
 4. Run the Flask application: `python starter.py`
 
