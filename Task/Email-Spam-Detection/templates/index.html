@@ -68,18 +68,6 @@
     </div>
 
     <script>
-      function predictWord() {
-        var word = document.getElementById("wordInput").value;
-        fetch("/predict_word?word=" + word)
-          .then((response) => response.json())
-          .then((data) => {
-            document.getElementById("wordResult").innerText =
-              "Probability that '" +
-              data.word +
-              "' is spam: " +
-              data.probability.toFixed(4);
-          });
-      }
 
       function predictEmail() {
         var email = document.getElementById("emailInput").value;
