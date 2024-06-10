@@ -1,3 +1,4 @@
 panda
 flask
 flask-cors
+numpy
